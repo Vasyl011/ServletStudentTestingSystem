@@ -41,12 +41,12 @@ public class TakeTestService {
         return studentTests;
     }
 
-    public Float testResult(Integer answerId){
+    public Float testResult(Integer answerId,Integer numberOfQuestions){
         Option option = optionDao.findById(answerId).get();
         if(option.getOptionCorrect()==true){
             count++;
         }
-        Float result =((count/2)*100);
+        Float result =((count/numberOfQuestions)*100);
         return result;
     }
 

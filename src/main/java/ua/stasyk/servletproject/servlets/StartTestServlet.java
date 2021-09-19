@@ -26,6 +26,8 @@ public class StartTestServlet extends HttpServlet {
         Integer testId = (Integer) session.getAttribute("testId");
         List<Question> questions = questionService.showQuestionListByTestId(testId);
         request.setAttribute("questions",questions);
+        Integer numberOfQuestions = questions.size();
+        session.setAttribute("numberOfQuestions",numberOfQuestions);
         List<StudentTest> studentTests = takeTestService.showStudentTestListByTestId(testId);
         request.setAttribute("studentTests",studentTests);
         request.getRequestDispatcher("starttest.jsp").forward(request,response);
@@ -34,13 +36,13 @@ public class StartTestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
         Integer studentTestId = Integer.parseInt(request.getParameter("studentTestId"));
+        Integer numberOfQuestions = (Integer) session.getAttribute("numberOfQuestions") ;
         Float result= null;
         String[] answers = request.getParameterValues("optionId");
         for (int i = 0; i < answers.length ; i++) {
-            Integer answer =Integer.parseInt((answers[i]));
-            result=takeTestService.testResult(answer);
+            Integer answerId =Integer.parseInt((answers[i]));
+            result=takeTestService.testResult(answerId,numberOfQuestions);
         }
         takeTestService.edit(result,studentTestId);
 

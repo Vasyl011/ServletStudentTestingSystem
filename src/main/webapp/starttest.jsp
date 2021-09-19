@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
 <!DOCTYPE HTML>
@@ -29,12 +30,10 @@
     <h1><fmt:message key="test.all.table.title"/></h1>
 
     <c:forEach var="studentTest" items="${studentTests}">
-<%--    <tr>--%>
-<%--    <p><fmt:message key="test.takeTest.start.startTime"/></p>--%>
-<%--    <p><fmt:parseDate value="${studentTest.getStartTestTime()}" var="studentTests"  pattern="dd-MM-yyyy" /> </p>--%>
-<%--    <p><fmt:message key="test.takeTest.start.endTime"/>: </p>--%>
-<%--    <p><fmt:parseDate value="${studentTest.getEndTestTime()}" var="studentTests"  pattern="dd-MM-yyyy" /> </p>--%>
-<%--    </tr>--%>
+        <tr>
+            <p><fmt:message key="test.takeTest.start.startTime"/>: ${f:formatLocalDateTime(studentTest.getStartTestTime(), "HH:mm:ss dd-MM-yyyy")}</p>
+            <p><fmt:message key="test.takeTest.start.endTime"/>: ${f:formatLocalDateTime(studentTest.getEndTestTime(), "HH:mm:ss dd-MM-yyyy")}</p>
+        </tr>
     <form action="${pageContext.request.contextPath}/starttest?studentTestId=${studentTest.getStudentTestId()}" method="POST">
 
     <tbody>
