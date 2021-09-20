@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,7 +18,9 @@ public class PersonalOfficeServlet extends HttpServlet {
     private TakeTestService takeTestService = new TakeTestService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<StudentTest> studentTests = takeTestService.showStudentTestList();
+        HttpSession session=request.getSession();
+        String username = (String) session.getAttribute("user");
+        List<StudentTest> studentTests = takeTestService.showStudentTestListByUser(username);
         request.setAttribute("studentTests",studentTests);
         request.getRequestDispatcher("personaloffice.jsp").forward(request,response);
     }

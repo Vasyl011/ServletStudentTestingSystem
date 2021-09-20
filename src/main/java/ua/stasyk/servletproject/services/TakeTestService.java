@@ -31,8 +31,9 @@ public class TakeTestService {
         studentTestDao.save(studentTest);
     }
 
-    public List<StudentTest> showStudentTestList(){
-        List<StudentTest> studentTests = studentTestDao.findAll();
+    public List<StudentTest> showStudentTestListByUser(String username){
+        User user =userDao.findByName(username);
+        List<StudentTest> studentTests = studentTestDao.findAllByStudentId(user.getId());
         return studentTests;
     }
 

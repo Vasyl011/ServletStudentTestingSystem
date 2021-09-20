@@ -81,4 +81,7 @@ public class SQLQueries {
     public static final String STUDENT_TEST_FIND_BY_ID = "SELECT * FROM student_tests WHERE student_tests_id=?";
     //language=SQL
     public static final String STUDENT_TEST_UPDATE = "UPDATE student_tests SET actual_end_test_time=0, result = ? WHERE student_tests_id = ?";
+    //language=SQL
+    public static final String STUDENT_TEST_FIND_BY_STUDENT_ID = "SELECT * FROM student_tests WHERE student_id=?";
+
 }

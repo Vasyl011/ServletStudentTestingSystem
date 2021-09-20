@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface StudentTestDao extends CrudDao<StudentTest> {
     List<StudentTest> findAllByTestId(Integer testId);
+    List<StudentTest> findAllByStudentId(Integer studentId);
 }

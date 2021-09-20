@@ -132,4 +132,36 @@ private final ConnectionPoolHolder connectionPoolHolder;
             throw new IllegalStateException(e);
         }
     }
+
+    @Override
+    public List<StudentTest> findAllByStudentId(Integer userId) {
+        try(Connection connection = connectionPoolHolder.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.STUDENT_TEST_FIND_BY_STUDENT_ID)){
+            preparedStatement.setInt(1, userId);
+            List<StudentTest> studentTests = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Integer studentTestsId = resultSet.getInt("student_tests_id");
+
+                Integer studentId = resultSet.getInt("student_id");
+                UserDao userDao = DaoFactory.getInstance().createUserDao();
+                User user = userDao.findById(studentId).get();
+
+                Integer testId = resultSet.getInt("test_id");
+                TestDao testDao = DaoFactory.getInstance().createTestDao();
+                Test test = testDao.findById(testId).get();
+
+                Float result = resultSet.getFloat("result");
+//                LocalDateTime actualEndTestTime = (LocalDateTime) resultSet.getObject("actual_end_test_time");
+                LocalDateTime starTest= (LocalDateTime) resultSet.getObject("start_test");
+                LocalDateTime endTest= (LocalDateTime) resultSet.getObject("end_test");
+
+                StudentTest studentTest = new StudentTest(studentTestsId,user,test,result,starTest,endTest);
+                studentTests.add(studentTest);
+            }
+            return studentTests;
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 }
