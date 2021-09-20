@@ -1,5 +1,6 @@
 package ua.stasyk.servletproject.servlets;
 
+import ua.stasyk.servletproject.models.User;
 import ua.stasyk.servletproject.services.UserService;
 
 import javax.servlet.ServletException;
@@ -27,18 +28,20 @@ public class LoginServlet extends HttpServlet {
         String password= request.getParameter("password");
         HttpSession session=request.getSession();
         ResourceBundle resourceBundle = (ResourceBundle) session.getAttribute("resourceBundle");
-        String role =userService.login(username,password);
+        User user = userService.login(username,password);
 
-        if(role==null){
-            session.setAttribute("message",resourceBundle.getString("login.danger.alert.blocked"));
-            response.sendRedirect("login");
-        }else if(role=="Wrong username or password!"){
+        if(user==null){
             session.setAttribute("message",resourceBundle.getString("login.danger.alert"));
             response.sendRedirect("login");
-        }else {
-            session.setAttribute("user",username);
-            session.setAttribute("role",role);
-            response.sendRedirect("index");
+        } else {
+            if(userService.isBlocked(user)==false) {
+                session.setAttribute("user", username);
+                session.setAttribute("role", user.getRole().getRole());
+                response.sendRedirect("index");
+            }else {
+                session.setAttribute("message",resourceBundle.getString("login.danger.alert.blocked"));
+                response.sendRedirect("login");
+            }
         }
     }
 }

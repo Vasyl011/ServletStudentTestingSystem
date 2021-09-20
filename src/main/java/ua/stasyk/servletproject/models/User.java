@@ -37,11 +37,12 @@ public class User {
         this.blocked=blocked;
     }
 
-    public User(Integer id,String username, String password, Role role){
+    public User(Integer id,String username, String password, Role role, Boolean blocked){
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.blocked=blocked;
     }
 
 

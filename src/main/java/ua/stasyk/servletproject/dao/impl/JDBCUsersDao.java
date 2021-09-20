@@ -103,7 +103,8 @@ public class JDBCUsersDao implements UserDao {
                 Integer roleId = resultSet.getInt("role_id");
                 String roleName = resultSet.getString("role");
                 Role role = new Role(roleId, roleName);
-                return Optional.of(new User(id, username, password, role));
+                Boolean blocked = resultSet.getBoolean("blocked");
+                return Optional.of(new User(id, username, password, role,blocked));
             }
             return Optional.empty();
         } catch (SQLException e) {

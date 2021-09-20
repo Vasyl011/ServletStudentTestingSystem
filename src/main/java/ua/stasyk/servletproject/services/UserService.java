@@ -12,7 +12,6 @@ import java.util.Optional;
 public class UserService{
 
    private Integer ROLE_USER_ID = 0;
-   private Integer ROLE_ADMIN_ID = 1;
 
    private UserDao userDao = DaoFactory.getInstance().createUserDao();
    private RoleDao roleDao = DaoFactory.getInstance().createRoleDao();
@@ -32,15 +31,15 @@ public class UserService{
        return user;
     }
 
-    public String login(String username,String password){
-        User user =userDao.findByName(username);
-        if(user.isBlocked()==false) {
-            if (userDao.checkUser(username, password)) {
-                return userDao.findByUsername(username).get().getRole().getRole();
-            }
-            return "Wrong username or password!";
+    public User login(String username,String password){
+        if (userDao.checkUser(username, password)) {
+            return userDao.findByUsername(username).get();
         }
-       return null;
+        return null;
+    }
+
+    public Boolean isBlocked(User user){
+        return user.isBlocked();
     }
 
     public List<User> showUserList(){
