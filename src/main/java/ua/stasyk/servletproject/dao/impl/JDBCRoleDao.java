@@ -56,8 +56,4 @@ public class JDBCRoleDao implements RoleDao {
         return null;
     }
 
-    @Override
-    public Role findByRole(String role) {
-        return null;
-    }
 }
