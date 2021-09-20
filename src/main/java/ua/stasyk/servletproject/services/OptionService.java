@@ -23,8 +23,4 @@ public class OptionService {
         optionDao.save(option);
     }
 
-//    public List<Option> showOptionList (){
-//        List<Option> options= optionDao.findAll();
-//        return options;
-//    }
 }
