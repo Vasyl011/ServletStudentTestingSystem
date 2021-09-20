@@ -113,10 +113,11 @@ private final ConnectionPoolHolder connectionPoolHolder;
     }
 
     @Override
-    public List<StudentTest> findAllByTestId(Integer testId) {
+    public List<StudentTest> findAllByTestIdAndStudentId(Integer testId, Integer studentId) {
         try(Connection connection = connectionPoolHolder.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.STUDENT_TEST_FIND_BY_TEST_ID)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.STUDENT_TEST_FIND_BY_TEST_ID_AND_STUDENT_ID)){
             preparedStatement.setInt(1, testId);
+            preparedStatement.setInt(2,studentId);
             List<StudentTest> studentTests = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -163,5 +164,20 @@ private final ConnectionPoolHolder connectionPoolHolder;
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    @Override
+    public boolean checkTest(Integer testId,Integer studentId) {
+        boolean exist = false;
+        try(Connection connection = connectionPoolHolder.getConnection();
+            PreparedStatement preparedStatement =connection.prepareStatement(SQLQueries.STUDENT_TEST_CHECK)){
+            preparedStatement.setInt(1,testId);
+            preparedStatement.setInt(2,studentId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            exist=resultSet.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exist;
     }
 }

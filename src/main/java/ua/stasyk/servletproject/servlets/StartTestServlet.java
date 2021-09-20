@@ -28,7 +28,9 @@ public class StartTestServlet extends HttpServlet {
         request.setAttribute("questions",questions);
         Integer numberOfQuestions = questions.size();
         session.setAttribute("numberOfQuestions",numberOfQuestions);
-        List<StudentTest> studentTests = takeTestService.showStudentTestListByTestId(testId);
+        String username = (String) session.getAttribute("user");
+        session.setAttribute("user", username);
+        List<StudentTest> studentTests = takeTestService.showStudentTestListByTestIdAndUser(testId,username);
         request.setAttribute("studentTests",studentTests);
         request.getRequestDispatcher("starttest.jsp").forward(request,response);
     }

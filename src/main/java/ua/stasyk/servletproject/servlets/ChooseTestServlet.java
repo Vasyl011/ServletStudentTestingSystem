@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @WebServlet("/choosetest")
 public class ChooseTestServlet extends HttpServlet {
@@ -19,7 +20,7 @@ public class ChooseTestServlet extends HttpServlet {
     private static final String testName = "Subject Name";
 
     private TestService testService = new TestService();
-    private TakeTestService taketestService= new TakeTestService();
+    private TakeTestService takeTestService= new TakeTestService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,15 +32,21 @@ public class ChooseTestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
+        ResourceBundle resourceBundle = (ResourceBundle) session.getAttribute("resourceBundle");
 
         if(request.getParameter("testId") != null) {
             Integer testId = Integer.parseInt(request.getParameter("testId"));
             session.setAttribute("testId", testId);
-            String user = (String) session.getAttribute("user");
-            session.setAttribute("user", user);
+            String username = (String) session.getAttribute("user");
+            session.setAttribute("user", username);
 
-            taketestService.create(testId, user);
-            response.sendRedirect("starttest");
+            Boolean testExist=takeTestService.create(testId, username);
+            if(!testExist){
+                response.sendRedirect("starttest");
+            }else {
+                session.setAttribute("message",resourceBundle.getString("take.test.danger.alert"));
+                response.sendRedirect("choosetest");
+            }
         }else {
             String sort = request.getParameter("sort");
             if (sort.equals(testName)) {

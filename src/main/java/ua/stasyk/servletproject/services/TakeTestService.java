@@ -19,16 +19,19 @@ public class TakeTestService {
 
     private Float count=0.0f;
 
-    public void create (Integer testId,String username){
-        StudentTest studentTest = new StudentTest();
-        Test test = testDao.findById(testId).get();
-        studentTest.setTest(test);
-
-        User user =userDao.findByName(username);
-        studentTest.setStudent(user);
-        studentTest.setStartTestTime(LocalDateTime.now());
-        studentTest.setEndTestTime(LocalDateTime.now().plusMinutes(test.getDuration()));
-        studentTestDao.save(studentTest);
+    public boolean create (Integer testId,String username){
+        User user = userDao.findByName(username);
+        if(!studentTestDao.checkTest(testId,user.getId())) {
+            StudentTest studentTest = new StudentTest();
+            Test test = testDao.findById(testId).get();
+            studentTest.setTest(test);
+            studentTest.setStudent(user);
+            studentTest.setStartTestTime(LocalDateTime.now());
+            studentTest.setEndTestTime(LocalDateTime.now().plusMinutes(test.getDuration()));
+            studentTestDao.save(studentTest);
+            return false;
+        }
+        return true;
     }
 
     public List<StudentTest> showStudentTestListByUser(String username){
@@ -37,8 +40,9 @@ public class TakeTestService {
         return studentTests;
     }
 
-    public List<StudentTest> showStudentTestListByTestId(Integer testId){
-        List<StudentTest> studentTests = studentTestDao.findAllByTestId(testId);
+    public List<StudentTest> showStudentTestListByTestIdAndUser(Integer testId,String username ){
+        User user =userDao.findByName(username);
+        List<StudentTest> studentTests = studentTestDao.findAllByTestIdAndStudentId(testId,user.getId());
         return studentTests;
     }
 
