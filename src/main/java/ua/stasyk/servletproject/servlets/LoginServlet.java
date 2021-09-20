@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("message",resourceBundle.getString("login.danger.alert"));
             response.sendRedirect("login");
         } else {
-            if(userService.isBlocked(user)==false) {
+            if(user.isBlocked()==false) {
                 session.setAttribute("user", username);
                 session.setAttribute("role", user.getRole().getRole());
                 response.sendRedirect("index");

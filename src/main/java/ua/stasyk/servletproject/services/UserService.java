@@ -38,10 +38,6 @@ public class UserService{
         return null;
     }
 
-    public Boolean isBlocked(User user){
-        return user.isBlocked();
-    }
-
     public List<User> showUserList(){
         List<User> users = userDao.findAll();
         return users;
