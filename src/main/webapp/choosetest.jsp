@@ -68,19 +68,6 @@
         </table>
     </form>
 
-
-<%--    <c:if test="${recentTest.size() > 0}">--%>
-<%--        <div class="my-4 border-top border-bottom">--%>
-<%--            <h3><fmt:message key="test.takeTest.recentAttempts"/></h3>--%>
-<%--            <c:forEach var="studentTest" items="${recentTest}">--%>
-<%--                <div class="my-3">--%>
-<%--                    <p>${f:formatLocalDateTime(studentTest.getStartTestTime(), "dd-MM-yyyy HH:mm")}: <fmt:message key="test.takeTest.recentAttempts.result"/> - ${studentTest.getResult() * 100}%</p>--%>
-<%--                </div>--%>
-<%--            </c:forEach>--%>
-
-<%--        </div>--%>
-<%--    </c:if>--%>
-
 </div>
 <div class="modal fade" id="startTestModal" tabindex="-1" role="dialog" aria-labelledby="startModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

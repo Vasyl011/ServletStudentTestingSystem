@@ -16,7 +16,6 @@ CREATE TABLE `db_servlet`.`tests` (
                                       `subject_name` varchar(255) DEFAULT NULL,
                                       `complexity` varchar(255) DEFAULT NULL,
                                       `duration` int(11) NOT NULL,
-                                      `number_of_questions` int(11) NOT NULL DEFAULT '0',
                                       PRIMARY KEY (`test_id`));
 
 CREATE TABLE `db_servlet`.`test_questions` (

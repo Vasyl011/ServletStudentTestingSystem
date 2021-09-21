@@ -58,6 +58,7 @@ public class TakeTestService {
     public void edit (Float result,Integer studentTestId){
         StudentTest studentTest = studentTestDao.findById(studentTestId).get();
         studentTest.setResult(result);
+        studentTest.setActualEndTestTime(LocalDateTime.now());
         studentTestDao.update(studentTest);
         count=0.0f;
     }

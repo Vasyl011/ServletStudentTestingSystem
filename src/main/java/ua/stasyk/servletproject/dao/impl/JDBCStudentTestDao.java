@@ -66,8 +66,9 @@ private final ConnectionPoolHolder connectionPoolHolder;
     public void update(StudentTest studentTest) {
         try(Connection connection = connectionPoolHolder.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.STUDENT_TEST_UPDATE)) {
-            preparedStatement.setFloat(1,studentTest.getResult());
-            preparedStatement.setInt(2,studentTest.getStudentTestId());
+            preparedStatement.setObject(1,studentTest.getActualEndTestTime());
+            preparedStatement.setFloat(2,studentTest.getResult());
+            preparedStatement.setInt(3,studentTest.getStudentTestId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -82,34 +83,7 @@ private final ConnectionPoolHolder connectionPoolHolder;
 
     @Override
     public List<StudentTest> findAll() {
-        try(Connection connection = connectionPoolHolder.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.STUDENT_TEST_FIND_ALL)){
-            List<StudentTest> studentTests = new ArrayList<>();
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
-                Integer studentTestsId = resultSet.getInt("student_tests_id");
-
-                Integer studentId = resultSet.getInt("student_id");
-                UserDao userDao = DaoFactory.getInstance().createUserDao();
-                User user = userDao.findById(studentId).get();
-
-                Integer testId = resultSet.getInt("test_id");
-                TestDao testDao = DaoFactory.getInstance().createTestDao();
-                Test test = testDao.findById(testId).get();
-
-                Float result = resultSet.getFloat("result");
-//                LocalDateTime actualEndTestTime = (LocalDateTime) resultSet.getObject("actual_end_test_time");
-                LocalDateTime starTest= (LocalDateTime) resultSet.getObject("start_test");
-                LocalDateTime endTest= (LocalDateTime) resultSet.getObject("end_test");
-
-                StudentTest studentTest = new StudentTest(studentTestsId,user,test,result,starTest,endTest);
-                studentTests.add(studentTest);
-
-            }
-            return studentTests;
-        } catch (SQLException e) {
-            throw new IllegalStateException(e);
-        }
+        return null;
     }
 
     @Override
@@ -153,11 +127,12 @@ private final ConnectionPoolHolder connectionPoolHolder;
                 Test test = testDao.findById(testId).get();
 
                 Float result = resultSet.getFloat("result");
-//                LocalDateTime actualEndTestTime = (LocalDateTime) resultSet.getObject("actual_end_test_time");
+                LocalDateTime actualEndTestTime = (LocalDateTime) resultSet.getObject("actual_end_test_time");
                 LocalDateTime starTest= (LocalDateTime) resultSet.getObject("start_test");
                 LocalDateTime endTest= (LocalDateTime) resultSet.getObject("end_test");
 
-                StudentTest studentTest = new StudentTest(studentTestsId,user,test,result,starTest,endTest);
+                LocalDateTime testTime = actualEndTestTime.minusMinutes(starTest.getMinute());
+                StudentTest studentTest = new StudentTest(studentTestsId,user,test,result,starTest,endTest,testTime);
                 studentTests.add(studentTest);
             }
             return studentTests;

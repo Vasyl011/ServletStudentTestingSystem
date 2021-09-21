@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <head>
     <meta charset="utf-8">
-    <title><fmt:message key="test.question.all.title"/></title>
+    <title><fmt:message key="test.startTest.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -27,7 +27,7 @@
     <c:remove var="message" scope="session"/>
     <c:remove var="type" scope="session"/>
 
-    <h1><fmt:message key="test.all.table.title"/></h1>
+    <h1><fmt:message key="test.takeTest.title"/></h1>
 
     <c:forEach var="studentTest" items="${studentTests}">
         <tr>

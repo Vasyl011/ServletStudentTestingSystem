@@ -53,11 +53,6 @@
                     <input type="number" min="1" max="120" class="form-control" id="duration" value="${test.getDuration()}" name="duration"/>
                 </div>
 
-<%--                <div class="form-group">--%>
-<%--                    <label for="numberOfQuestions"><fmt:message key="test.create.form.NumberOfQuestion"/></label>--%>
-<%--                    <input type="number" min="1" max="30" class="form-control" id="numberOfQuestions" name="numberOfQuestions" />--%>
-<%--                </div>--%>
-
                 <div class="row mt-3">
                     <div class="col-6">
                         <button type="submit" class="btn btn-success btn-block"><fmt:message key="test.edit.form.editButton"/></button>

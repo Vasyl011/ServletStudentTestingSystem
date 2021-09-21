@@ -14,14 +14,14 @@ public class StudentTest {
 
     public StudentTest(){}
 
-    public StudentTest(Integer studentTestId, User student, Test test, Float result, LocalDateTime startTestTime, LocalDateTime endTestTime) {
+    public StudentTest(Integer studentTestId, User student, Test test, Float result, LocalDateTime startTestTime, LocalDateTime endTestTime,LocalDateTime actualEndTestTime) {
         this.studentTestId = studentTestId;
         this.student = student;
         this.test = test;
         this.result = result;
         this.startTestTime = startTestTime;
         this.endTestTime = endTestTime;
-//        this.actualEndTestTime = actualEndTestTime;
+        this.actualEndTestTime = actualEndTestTime;
     }
 
     public StudentTest(Integer studentTestId, LocalDateTime startTestTime, LocalDateTime endTestTime) {

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
 <!DOCTYPE HTML>
@@ -20,10 +21,10 @@
     <div class="jumbotron">
         <div class="container">
             <c:if test="${message ne null}">
-            <div class="alert alert-dismissible alert-${type}">
-                <button type="button" class="close" data-dismiss="alert" aria-label="close" aria-hidden="true">&times;</button>
-                <span>${message}</span>
-            </div>
+                <div class="alert alert-dismissible alert-${type}">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close" aria-hidden="true">&times;</button>
+                    <span>${message}</span>
+                </div>
             </c:if>
             <c:remove var="message" scope="session"/>
             <c:remove var="type" scope="session"/>
@@ -33,14 +34,16 @@
                 <tr>
                     <th><fmt:message key="personaloffice.testname"/></th>
                     <th><fmt:message key="personaloffice.result"/></th>
-                    <th colspan="2"></th>
+                    <th><fmt:message key="personaloffice.testtime"/></th>
+                    <th colspan="3"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="studentTest" items="${studentTests}">
                     <tr>
                         <td>${studentTest.getTest().getSubjectName()}</td>
-                        <td>${studentTest.getResult()}</td>
+                        <td>${studentTest.getResult()}%</td>
+                        <td>${f:formatLocalDateTime(studentTest.getActualEndTestTime(), "mm:ss")}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

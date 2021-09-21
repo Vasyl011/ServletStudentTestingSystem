@@ -32,23 +32,18 @@
             <table class="table table-bordered">
                 <thead class="thead-dark">
                 <tr>
-<%--                    <th><fmt:message key="test.all.table.id"/></th>--%>
                     <th><fmt:message key="test.all.table.subjectname"/></th>
                     <th><fmt:message key="test.all.table.complexity"/></th>
                     <th><fmt:message key="test.all.table.duration"/></th>
-<%--                    <th><fmt:message key="test.all.table.number_of_questions"/></th>--%>
                     <th colspan="3"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="test" items="${tests}">
                     <tr>
-<%--                        <td>${test.getTestId()}</td>--%>
                         <td>${test.getSubjectName()}</td>
                         <td>${test.getComplexity()}</td>
                         <td>${test.getDuration()}</td>
-<%--                        <td>${test.getNumberOfQuestions()}</td>--%>
-
 
                         <form action="${pageContext.request.contextPath}/testslist?editId=${test.getTestId()}" method="post">
                             <td ><div><button type="submit" class="btn btn-outline-primary"><fmt:message key="test.all.editButton"/></button></div></td>
