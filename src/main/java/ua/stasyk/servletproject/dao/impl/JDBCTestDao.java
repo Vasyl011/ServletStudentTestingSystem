@@ -1,5 +1,7 @@
 package ua.stasyk.servletproject.dao.impl;
 
+import ua.stasyk.servletproject.dao.DaoFactory;
+import ua.stasyk.servletproject.dao.StudentTestDao;
 import ua.stasyk.servletproject.dao.TestDao;
 import ua.stasyk.servletproject.models.Test;
 
@@ -45,7 +47,6 @@ public class JDBCTestDao implements TestDao {
             preparedStatement.setString(1,test.getSubjectName());
             preparedStatement.setString(2,test.getComplexity());
             preparedStatement.setInt(3,test.getDuration());
-//            preparedStatement.setInt(4,test.getNumberOfQuestions());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -60,7 +61,6 @@ public class JDBCTestDao implements TestDao {
             preparedStatement.setString(1,test.getSubjectName());
             preparedStatement.setString(2,test.getComplexity());
             preparedStatement.setInt(3,test.getDuration());
-//            preparedStatement.setInt(4,test.getNumberOfQuestions());
             preparedStatement.setInt(4,test.getTestId());
 
             preparedStatement.executeUpdate();
@@ -73,6 +73,8 @@ public class JDBCTestDao implements TestDao {
     public void delete(Integer id) {
         try(Connection connection = connectionPoolHolder.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.TEST_DELETE)) {
+            StudentTestDao studentTestDao = DaoFactory.getInstance().createStudentTestDao();
+            studentTestDao.deleteByTestId(id);
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();

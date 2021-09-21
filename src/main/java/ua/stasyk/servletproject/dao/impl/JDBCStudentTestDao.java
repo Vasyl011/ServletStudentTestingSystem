@@ -155,4 +155,15 @@ private final ConnectionPoolHolder connectionPoolHolder;
         }
         return exist;
     }
+
+    @Override
+    public void deleteByTestId(Integer testId) {
+        try (Connection connection=connectionPoolHolder.getConnection();
+             PreparedStatement preparedStatement=connection.prepareStatement(SQLQueries.STUDENT_TEST_DELETE_BY_TEST_ID)){
+            preparedStatement.setInt(1,testId);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 }

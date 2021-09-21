@@ -27,7 +27,7 @@ public class SQLQueries {
 
     //Test
     //language=SQL
-    public static final String TEST_CREATE = "INSERT INTO tests (subject_name,complexity,duration,number_of_questions) VALUES (?,?,?,0)";
+    public static final String TEST_CREATE = "INSERT INTO tests (subject_name,complexity,duration) VALUES (?,?,?)";
     //language=SQL
     public static final String TEST_FIND_ALL = "SELECT * FROM tests";
     //language=SQL
@@ -83,5 +83,7 @@ public class SQLQueries {
     public static final String STUDENT_TEST_FIND_BY_STUDENT_ID = "SELECT * FROM student_tests WHERE student_id=?";
     //language=SQL
     public static final String STUDENT_TEST_CHECK = "SELECT * FROM student_tests WHERE test_id = ? AND student_id = ?";
+    //language=SQL
+    public static final String STUDENT_TEST_DELETE_BY_TEST_ID = "DELETE FROM student_tests WHERE test_id = ?";
 
 }
