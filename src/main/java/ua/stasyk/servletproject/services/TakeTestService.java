@@ -59,5 +59,6 @@ public class TakeTestService {
         StudentTest studentTest = studentTestDao.findById(studentTestId).get();
         studentTest.setResult(result);
         studentTestDao.update(studentTest);
+        count=0.0f;
     }
 }
