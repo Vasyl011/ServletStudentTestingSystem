@@ -26,7 +26,6 @@ public class CreateTestServlet extends HttpServlet {
         String subjectName = request.getParameter("subjectName");
         String complexity =request.getParameter("complexity");
         Integer duration = Integer.parseInt(request.getParameter("duration"));
-//        Integer numberOfQuestions = Integer.parseInt(request.getParameter("numberOfQuestions"));
         testService.create(subjectName,complexity,duration);
         session.setAttribute("subjectName",subjectName);
         response.sendRedirect("question");

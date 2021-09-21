@@ -6,15 +6,13 @@ public class Test {
     private String subjectName;
     private String complexity;
     private Integer duration;
-    private Integer numberOfQuestions;
 
 
-    public Test(Integer testId,String subjectName,String complexity,Integer duration,Integer numberOfQuestions){
+    public Test(Integer testId,String subjectName,String complexity,Integer duration){
         this.testId=testId;
         this.subjectName=subjectName;
         this.complexity=complexity;
         this.duration=duration;
-        this.numberOfQuestions=numberOfQuestions;
     }
 
     public Test(Integer testId , String subjectName){
@@ -57,15 +55,6 @@ public class Test {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
-    }
-
-
-    public Integer getNumberOfQuestions() {
-        return numberOfQuestions;
-    }
-
-    public void setNumberOfQuestions(Integer numberOfQuestions) {
-        this.numberOfQuestions = numberOfQuestions;
     }
 
     public String getSubjectName() {

@@ -8,8 +8,6 @@ public class SQLQueries {
     //language=SQL
     public static final String USER_FIND_BY_ID= "SELECT *FROM usr WHERE usr_id = ?";
     //language=SQL
-    public static final String USER_BLOCK_USER = "UPDATE usr SET blocked = ? WHERE usr_id=?";
-    //language=SQL
     public static final String USER_FIND_BY_USERNAME = "SELECT usr.*, role FROM usr LEFT JOIN roles ON usr.role_id = roles.id where usr.username = ?";
     //language=SQL
     public static final String USER_CREATE = "INSERT INTO usr(username,password,blocked,role_id) VALUES (?,?,?,?)";

@@ -30,12 +30,10 @@ public class UserListServlet extends HttpServlet {
         if(request.getParameter("unblocked") != null) {
             Integer userId= Integer.parseInt(request.getParameter("unblocked"));
             userService.unblockedUser(userId);
-            session.setAttribute("unblocked",userId);
             response.sendRedirect("userlist");
         } else if (request.getParameter("blocked") !=null){
             Integer userId= Integer.parseInt(request.getParameter("blocked"));
             userService.blockedUser(userId);
-            session.setAttribute("blocked",userId);
             response.sendRedirect("userlist");
         }
     }

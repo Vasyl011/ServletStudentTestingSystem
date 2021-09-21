@@ -94,9 +94,9 @@ public class JDBCTestDao implements TestDao {
                 String subjectName= resultSet.getString("subject_name");
                 String complexity= resultSet.getString("complexity");
                 Integer duration= resultSet.getInt("duration");
-                Integer number_of_questions=resultSet.getInt("number_of_questions");
 
-                Test test = new Test(test_id,subjectName,complexity,duration,number_of_questions);
+
+                Test test = new Test(test_id,subjectName,complexity,duration);
                 tests.add(test);
             }
             return tests;
@@ -116,8 +116,7 @@ public class JDBCTestDao implements TestDao {
                 String subName = resultSet.getString("subject_name");
                 String complexity= resultSet.getString("complexity");
                 Integer duration = resultSet.getInt("duration");
-                Integer number_of_questions= resultSet.getInt("number_of_questions");
-                return Optional.of(new Test(test_id,subName,complexity,duration,number_of_questions));
+                return Optional.of(new Test(test_id,subName,complexity,duration));
             }
          return Optional.empty();
         } catch (SQLException e) {
@@ -136,9 +135,8 @@ public class JDBCTestDao implements TestDao {
                 String subjectName= resultSet.getString("subject_name");
                 String complexity= resultSet.getString("complexity");
                 Integer duration= resultSet.getInt("duration");
-                Integer number_of_questions=resultSet.getInt("number_of_questions");
 
-                Test test = new Test(test_id,subjectName,complexity,duration,number_of_questions);
+                Test test = new Test(test_id,subjectName,complexity,duration);
                 tests.add(test);
             }
             return tests;
@@ -158,9 +156,8 @@ public class JDBCTestDao implements TestDao {
                 String subjectName= resultSet.getString("subject_name");
                 String complexity= resultSet.getString("complexity");
                 Integer duration= resultSet.getInt("duration");
-                Integer number_of_questions=resultSet.getInt("number_of_questions");
 
-                Test test = new Test(test_id,subjectName,complexity,duration,number_of_questions);
+                Test test = new Test(test_id,subjectName,complexity,duration);
                 tests.add(test);
             }
             return tests;

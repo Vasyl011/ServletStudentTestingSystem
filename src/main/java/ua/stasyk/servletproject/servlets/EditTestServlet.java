@@ -26,7 +26,6 @@ public class EditTestServlet extends HttpServlet {
         String subjectName = request.getParameter("subjectName");
         String complexity =request.getParameter("complexity");
         Integer duration = Integer.parseInt(request.getParameter("duration"));
-//        Integer numberOfQuestions = Integer.parseInt(request.getParameter("numberOfQuestions"));
         testService.edit(testId,subjectName,complexity,duration);
         response.sendRedirect("testslist");
     }

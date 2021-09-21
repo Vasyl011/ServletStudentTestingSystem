@@ -7,8 +7,6 @@ import ua.stasyk.servletproject.models.Test;
 
 import java.util.List;
 
-;
-
 
 public class TestService {
     private TestDao testDao = DaoFactory.getInstance().createTestDao();
@@ -18,7 +16,6 @@ public class TestService {
         test.setSubjectName(sub_name);
         test.setComplexity(complexity);
         test.setDuration(duration);
-//        test.setNumberOfQuestions(numberOfQuestions);
         testDao.save(test);
     }
 
@@ -32,7 +29,6 @@ public class TestService {
     test.setSubjectName(subjectName);
     test.setComplexity(complexity);
     test.setDuration(duration);
-//    test.setNumberOfQuestions(numberOfQuestions);
     testDao.update(test);
     }
 
