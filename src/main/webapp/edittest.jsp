@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <label for="subjectName"><fmt:message key="test.edit.form.subject"/></label>
-                    <input type="text" class="form-control" id="subjectName" name="subjectName"/>
+                    <input type="text" class="form-control" id="subjectName" name="subjectName" required/>
                 </div>
 
                 <div class="form-group">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="duration"><fmt:message key="test.edit.form.duration"/></label>
-                    <input type="number" min="1" max="120" class="form-control" id="duration" value="${test.getDuration()}" name="duration"/>
+                    <input type="number" min="1" max="120" class="form-control" id="duration" value="${test.getDuration()}" name="duration" required/>
                 </div>
 
                 <div class="row mt-3">

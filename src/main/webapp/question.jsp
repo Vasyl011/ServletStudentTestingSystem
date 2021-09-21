@@ -36,30 +36,30 @@
                 </c:if>
                 <div class="form-group">
                     <label for="questionText"><fmt:message key="test.question.add.questionText"/></label>
-                    <input type="text" class="form-control" id="questionText" name="questionText"/>
+                    <input type="text" class="form-control" id="questionText" name="questionText" required/>
                 </div>
 
                 <div class="form-group">
                     <label for="option1"><fmt:message key="test.option1.add.option.text"/></label>
-                    <input type="text" class="form-control" id="option1" name="option1"/>
+                    <input type="text" class="form-control" id="option1" name="option1" required/>
                     <input type="checkbox" id="option1isCorrect" value="true" name="option1isCorrect">
                 </div>
 
                 <div class="form-group">
                     <label for="option2"><fmt:message key="test.option2.add.option.text"/></label>
-                    <input type="text" class="form-control" id="option2" name="option2"/>
+                    <input type="text" class="form-control" id="option2" name="option2" required/>
                     <input type="checkbox" id="option2isCorrect" value="true" name="option2isCorrect">
                 </div>
 
                 <div class="form-group">
                     <label for="option3"><fmt:message key="test.option3.add.option.text"/></label>
-                    <input type="text" class="form-control" id="option3" name="option3"/>
+                    <input type="text" class="form-control" id="option3" name="option3" required/>
                     <input type="checkbox" id="option3isCorrect" value="true" name="option3isCorrect">
                 </div>
 
                 <div class="form-group">
                     <label for="option4"><fmt:message key="test.option4.add.option.text"/></label>
-                    <input type="text" class="form-control" id="option4" name="option4"/>
+                    <input type="text" class="form-control" id="option4" name="option4" required/>
                     <input type="checkbox" id="option4isCorrect" value="true" name="option4isCorrect">
                 </div>
 
