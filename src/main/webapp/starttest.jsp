@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%@ include file="menu.jspf" %>
+<%@ include file="mainuser.jspf" %>
 
 <div class="container">
     <c:if test="${message ne null}">
