@@ -1,5 +1,6 @@
 package ua.stasyk.servletproject.services;
 
+import ua.stasyk.servletproject.PasswordEncoder;
 import ua.stasyk.servletproject.dao.DaoFactory;
 import ua.stasyk.servletproject.dao.RoleDao;
 import ua.stasyk.servletproject.dao.UserDao;
@@ -24,7 +25,7 @@ public class UserService{
        }
        Role role = roleDao.findById(ROLE_USER_ID).get();
        user.setUsername(username);
-       user.setPassword(password);
+       user.setPassword(PasswordEncoder.encode(password));
        user.setBlocked(false);
        user.setRole(role);
        userDao.save(user);
@@ -32,7 +33,7 @@ public class UserService{
     }
 
     public User login(String username,String password){
-        if (userDao.checkUser(username, password)) {
+        if (userDao.checkUser(username, PasswordEncoder.encode(password))) {
             return userDao.findByUsername(username).get();
         }
         return null;
