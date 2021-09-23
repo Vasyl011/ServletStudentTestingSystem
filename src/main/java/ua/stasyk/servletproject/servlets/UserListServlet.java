@@ -26,7 +26,6 @@ public class UserListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
         if(request.getParameter("unblocked") != null) {
             Integer userId= Integer.parseInt(request.getParameter("unblocked"));
             userService.unblockedUser(userId);

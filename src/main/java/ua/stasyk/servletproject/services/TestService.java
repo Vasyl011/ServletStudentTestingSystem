@@ -2,14 +2,17 @@ package ua.stasyk.servletproject.services;
 
 
 import ua.stasyk.servletproject.dao.DaoFactory;
+import ua.stasyk.servletproject.dao.QuestionDao;
 import ua.stasyk.servletproject.dao.TestDao;
+import ua.stasyk.servletproject.models.Question;
 import ua.stasyk.servletproject.models.Test;
 
 import java.util.List;
 
 
 public class TestService {
-    private TestDao testDao = DaoFactory.getInstance().createTestDao();
+    private final TestDao testDao = DaoFactory.getInstance().createTestDao();
+    private final QuestionDao questionDao =DaoFactory.getInstance().createQuestionDao();
 
     public void create(String sub_name,String complexity,Integer duration){
         Test test = new Test();
@@ -19,8 +22,13 @@ public class TestService {
         testDao.save(test);
     }
 
-    public void delete(Integer testID){
-        testDao.delete(testID);
+    public void delete(Integer testId){
+        List<Question> questions = questionDao.findAllByTestId(testId);
+        for (int i = 0; i <questions.size() ; i++) {
+            Question question = questions.get(i);
+            questionDao.delete(question.getQuestionId());
+        }
+        testDao.delete(testId);
     }
 
     public void edit (Integer testId, String subjectName,String complexity,Integer duration){
